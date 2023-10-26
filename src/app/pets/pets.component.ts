@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PetsService } from '../services/pets.service';
 import { Subscription } from 'rxjs';
 import { Pet } from '../model/pet.model';
@@ -9,7 +9,7 @@ import { PetSearchResult } from '../model/pet-search-result.model';
   templateUrl: './pets.component.html',
   styleUrls: ['./pets.component.css']
 })
-export class PetsComponent implements OnInit {
+export class PetsComponent implements OnInit, OnDestroy {
 
   count: number = 0;
   pets: Pet[] = [];
@@ -32,6 +32,10 @@ export class PetsComponent implements OnInit {
         console.log('error: ', response);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionAllPets.unsubscribe();
   }
 
 }
