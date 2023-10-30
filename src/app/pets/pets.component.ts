@@ -22,8 +22,16 @@ export class PetsComponent implements OnInit, OnDestroy {
     this.getAllPets();
   }
 
+  queryParams = {
+    sort: '',
+    filter: {
+      category: '',
+      sex: ''
+    }
+  }
+
   getAllPets() {
-    this.subscriptionAllPets = this.petsService.getAllPets().subscribe({
+    this.subscriptionAllPets = this.petsService.getAllPets(this.queryParams).subscribe({
       next: (searchResult: PetSearchResult) => {
         this.count = searchResult.count;
         this.pets = searchResult.results;
@@ -32,6 +40,21 @@ export class PetsComponent implements OnInit, OnDestroy {
         console.log('error: ', response);
       }
     })
+  }
+
+  getCategory(category: any) {
+    this.queryParams.filter.category = category.target.value;
+    this.getAllPets();
+  }
+
+  getSex(sex: any) {
+    this.queryParams.filter.sex = sex.target.value;
+    this.getAllPets();
+  }
+
+  sortPets(sortBy: any) {
+    this.queryParams.sort = sortBy.target.value;
+    this.getAllPets();
   }
 
   ngOnDestroy(): void {

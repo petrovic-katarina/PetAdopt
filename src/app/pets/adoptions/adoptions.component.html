@@ -1,1 +1,20 @@
-<p>adoptions works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Pet id</th>
+      <th scope="col">Pet name</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let adoptItem of adoptions.results">
+      <td>{{adoptItem.petId}}</td>
+      <td>{{adoptItem.petName}}</td>
+      <td>{{adoptItem.name}}</td>
+      <td>{{adoptItem.contact}}</td>
+      <button type="button" class="btn btn-primary" (click)="approveAdopt(adoptItem.petId)">Approve</button>
+    </tr>
+  </tbody>
+</table>
+

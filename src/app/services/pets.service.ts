@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { PetSearchResult } from '../model/pet-search-result.model';
@@ -15,8 +15,18 @@ export class PetsService {
 
   // GET http://localhost:3000/api/pets
 
-  getAllPets(): Observable<PetSearchResult> {
-    return this.http.get(`${baseUrl}`).pipe(map((data: any) => {
+  getAllPets(params?: any): Observable<PetSearchResult> {
+
+    let options = {};
+
+    if (params) {
+      options = {
+        params: new HttpParams()
+          .set("filter", params.filter && JSON.stringify(params.filter) || "")
+          .set('sort', params.sort || '')
+      }
+    }
+    return this.http.get(`${baseUrl}`, options).pipe(map((data: any) => {
       return new PetSearchResult(data)
     }))
   }

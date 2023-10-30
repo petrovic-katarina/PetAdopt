@@ -1,6 +1,50 @@
 <div class="row">
+  <!-- Category select -->
+  <div class="col-4">
+    <div style="display: flex; align-items: center;">
+      Category:
+    <select class="form-select" (change)="getCategory($event)">
+      <option value="">All</option>
+      <option value="cat">Cats</option>
+      <option value="dog">Dogs</option>
+      <option value="other">Other</option>
+    </select>  
+    </div>
+  </div>
+  <!-- Radio button -->
+  <div class="col-4">
+    Sex:
+    <div class="form-check form-check-inline">
+      <input type="radio" name="any" class="form-check-input" value="" (click)="getSex($event)">
+      <label for="any">Any</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" name="any" class="form-check-input" value="m" (click)="getSex($event)">
+      <label for="any">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input type="radio" name="any" class="form-check-input" value="f" (click)="getSex($event)">
+      <label for="any">Female</label>
+    </div>
+  </div>
+
+  <!-- Sorting -->
+  <div class="col-4">
+    <div style="display: flex; align-items: center;">
+      Sort by: 
+      <select class="form-select" (change)="sortPets($event)">
+        <option value="">---</option>
+        <option value="name">Name</option>
+        <option value="size_kg">Size</option>
+      </select>  
+    </div>
+  </div>
+</div>
+
+
+<!-- Pet list -->
+<div class="row">
   <div class="col-3" *ngFor="let petItem of pets">
-    <!-- Pet list -->
     <app-pet-item [pets]="petItem"></app-pet-item>
   </div>
 </div>

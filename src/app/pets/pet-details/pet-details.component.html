@@ -9,7 +9,6 @@
               <p>Category: {{pet.category}}</p>
               <p>Sex: {{pet.sex == 'f' ? 'Female' : 'Male'}}</p>
               <p class="card-text">Size: {{pet.size_kg}}kg</p>
-              
           </div>
       </div>
       <hr>
@@ -17,11 +16,30 @@
           <p>{{pet.story}}</p>
       </div>
   </div>
-  <div class = "col-4">
+  <div class="col-4">
       <div class="row" class="text-center">
           <h3>Adopt</h3>
-      </div>
-          <p>Forma</p>
+      </div><br>
+        <form [formGroup]="pet_form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" formControlName="name">
+                <small class="text-danger" *ngIf="name?.touched && name?.errors?.['required']">
+                    First Name is required!
+                </small><br>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="text" name="contact" id="contact" class="form-control" placeholder="Enter your contact info (email/phone)" formControlName="contact">
+                <small class="text-danger" *ngIf="contact?.touched && contact?.errors?.['required']">
+                    Contact is required!
+                </small><br>
+            </div>
+            <div class="ms-auto">
+            <button type="submit" class="btn btn-primary" [disabled]="!pet_form.valid" (click)="onSubmit()">Submit request</button>
+            </div>
+
+        </form>
   </div>
 </div>
 
